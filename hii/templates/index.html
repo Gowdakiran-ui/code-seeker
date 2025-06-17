@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CodeSeeker 🧠</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #00ff90;
+      font-family: 'Courier New', monospace;
+      padding: 2rem;
+    }
+    input, button {
+      padding: 10px;
+      background-color: #1a1a1a;
+      color: #00ff90;
+      border: 1px solid #00ff90;
+    }
+    .box {
+      border: 1px dashed #00ff90;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>CodeSeeker: Goat Mode On 🐐</h1>
+  <p>Submit a GitHub repo keyword and get its AI summary instantly</p>
+  <form method="POST">
+    <input type="text" name="keyword" placeholder="e.g., blood donation system" required>
+    <button type="submit">🚀 Submit</button>
+  </form>
+
+  {% if result %}
+    <div class="box">
+      <h2>🔍 Result for "{{ keyword }}"</h2>
+      {% for repo in result %}
+        <p><strong>Name:</strong> {{ repo.name or repo["name"] }}</p>
+        <p><strong>URL:</strong> <a href="{{ repo.url or repo['url'] }}" style="color:#00ff90">{{ repo.url or repo['url'] }}</a></p>
+        <p><strong>Description:</strong> {{ repo.description or repo["description"] }}</p>
+        <hr>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if status %}
+    <p>Status: {{ status }}</p>
+  {% endif %}
+</body>
+</html>
